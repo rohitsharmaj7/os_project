@@ -1,6 +1,6 @@
 #include<stdio.h> 
 static int n;
-int i,j,total_time=0;//time quantum
+int i,j,total_time=0,priority;
 float avgtat=0,avgwt=0;
 int queue[20];
 int time=0,front=0,rear=0,q_count=0,m=0,s=0;
@@ -25,7 +25,7 @@ main()
 	{
 		printf("enter the name of process %d,at,st\n",i);
 		scanf("%s",&aa[i].pname);
-		scanf("%d%d",&aa[i].at,&aa[i].st);
+		scanf("%d%d%d",&aa[i].at,&aa[i].st,&priority);
 	}
 
 //sorting
@@ -80,7 +80,6 @@ void finding(struct data a[])
 
 		time=a[0].at;
 
-
 		q_count=1;
 		push(j++);
 		
@@ -92,11 +91,11 @@ void finding(struct data a[])
 					{
 					
 					p_process=pop();//queue[front];
-					
 					//p_process=i;
+					priority=1;
+					printf("\npresent process is :%d and priority is %d",p_process,priority);
 					count=0;
 					flag=1;
-
 					}
 					temp_st[p_process]--;
 
@@ -164,28 +163,25 @@ push(j++);
 }
 void display(struct data a[])
 {
-//n=5;
-
-printf("n=%d	\n",n);
+	printf("\nTotal no of proccess=%d	\n",n);
 
 for(i=0;i<n;i++)
 {
-a[i].tat=a[i].ct-a[i].at;
-a[i].wt=a[i].tat-a[i].st;
-a[i].ntat=(float)a[i].tat/a[i].st;
+	a[i].tat=a[i].ct-a[i].at;
+	a[i].wt=a[i].tat-a[i].st;
+	a[i].ntat=(float)a[i].tat/a[i].st;
 }
 for(i=0;i<n;i++)
 {
-avgtat+=a[i].tat;
-avgwt+=a[i].wt;
+	avgtat+=a[i].tat;
+	avgwt+=a[i].wt;
 }
 avgtat=avgtat/n;
 avgwt=avgwt/n;
 printf("pname\tat\tst\tct\ttat\twt\tntat\n");
 for(i=0;i<n;i++)
 {
-printf("%s\t%d\t%d\t%d\t%d\t%d\t%f\n",a[i].pname,a[i].at,a[i].st,a[i].ct,a[i].tat,a[i].wt,a[i].ntat);
+	printf("%s\t%d\t%d\t%d\t%d\t%d\t%f\n",a[i].pname,a[i].at,a[i].st,a[i].ct,a[i].tat,a[i].wt,a[i].ntat);
 }
-printf("avgtat=%f\navgwt=%f\n",avgtat,avgwt);
-
+	printf("avgtat=%f\navgwt=%f\n",avgtat,avgwt);
 }

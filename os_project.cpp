@@ -1,4 +1,5 @@
 #include<stdio.h> 
+#include<conio.h>
 static int n;
 int i,j,total_time=0,priority;
 float avgtat=0,avgwt=0;
